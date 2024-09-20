@@ -23,6 +23,8 @@ using System.Dynamic;
 using System.Linq.Expressions;
 using System.Windows.Media.Animation;
 using Microsoft.Win32.SafeHandles;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace PipesServer
 {
@@ -137,9 +139,10 @@ namespace PipesServer
                             {
                                 //
                                 SendMessageToClients(user_name, user_message);
+                                this.user_messages.Items.Add($">> {user_name} : {user_message}");
                             }
 
-                            this.user_messages.Items.Add(">> " + msg);                      // выводим полученное сообщение на форму
+                            //this.user_messages.Items.Add(">> " + msg);                      // выводим полученное сообщение на форму
                         }
                     });
 
@@ -158,7 +161,15 @@ namespace PipesServer
             dynamic msg_object = new System.Dynamic.ExpandoObject();
             msg_object.user_name = user_name;
             msg_object.user_message = user_message;
-            string msg_json = JsonSerializer.Serialize(msg_object);
+            
+            // Для кириллицы
+            var options1 = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true,
+            };
+
+            string msg_json = JsonSerializer.Serialize(msg_object, options1);
 
             byte[] buff = Encoding.Unicode.GetBytes(msg_json);
 
