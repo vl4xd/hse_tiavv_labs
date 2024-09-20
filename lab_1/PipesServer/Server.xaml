@@ -1,0 +1,26 @@
+﻿<Window x:Class="PipesServer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PipesServer"
+        mc:Ignorable="d"
+        Title="Чат 1.1. (Сервер)" Height="450" Width="800"
+        MinHeight="300"
+        MinWidth="500" 
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Чат" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" Text="Пользователи" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <ListBox Name="user_messages" Grid.Column="0" Grid.Row="1"></ListBox>
+        <ListBox Name="connected_users" Grid.Column="1" Grid.Row="1"></ListBox>
+    </Grid>
+</Window>
