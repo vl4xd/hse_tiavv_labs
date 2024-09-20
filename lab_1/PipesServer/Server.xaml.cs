@@ -79,8 +79,8 @@ namespace PipesServer
             if (this.t != null)
                 this.t.Abort();          // завершаем поток
 
-            if (this.PipeHandle != -1)
-                DIS.Import.CloseHandle(this.PipeHandle);     // закрываем дескриптор канала
+            //if (this.PipeHandle != -1)
+            //    DIS.Import.CloseHandle(this.PipeHandle);     // закрываем дескриптор канала
         }
 
         private void ReceiveMessage()

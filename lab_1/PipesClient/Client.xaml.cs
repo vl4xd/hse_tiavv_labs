@@ -124,8 +124,8 @@ namespace PipesClient
         private void DisconnecFromServer()
         {
             this._connected = false; // сообщаем что работа с каналом клиента завершена
-            if (this.ClientPipeHandle != -1)
-                DIS.Import.CloseHandle(ClientPipeHandle); // закрываем дескриптор канала клиента
+            //if (this.ClientPipeHandle != -1)
+            //    DIS.Import.CloseHandle(ClientPipeHandle); // закрываем дескриптор канала клиента
             if (t != null)
                 this.t.Abort(); // завершаем поток клиента
 
