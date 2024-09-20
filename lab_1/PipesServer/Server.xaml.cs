@@ -91,7 +91,6 @@ namespace PipesServer
             // входим в бесконечный цикл работы с каналом
             while (this._continue)
             {
-
                 if (DIS.Import.ConnectNamedPipe(PipeHandle, 0))
                 {
                     byte[] buff = new byte[1024];                                           // буфер прочитанных из канала байтов
@@ -101,80 +100,81 @@ namespace PipesServer
                     // считываем количество реально прочитанных байт из канала начиная с 0 индекса т.к. изначально создается buff в размере 1024 байт
                     // иначе при парсинге сообщения в json возникает ошибка из-за прочитанных в конце пустых байтов
                     msg = Encoding.Unicode.GetString(buff, 0, (int)realBytesReaded);         // выполняем преобразование байтов в последовательность символов
-                    user_messages.Dispatcher.Invoke((MethodInvoker)delegate
+
+                    if (msg != "")
                     {
-                        if (msg != "")
+                        // создаем динамический объект и десериализуем json строку
+                        dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
+                        bool is_connection = Convert.ToBoolean(Convert.ToString(json_msg.is_connection)); // получаем статус сообщения
+                        string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
+                        string pc_name = Convert.ToString(json_msg.pc_name); // получаем имя машины
+                        string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
+
+                        if (is_connection)
                         {
-                            // создаем динамический объект и десериализуем json строку
-                            dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
-                            bool is_connection = Convert.ToBoolean(Convert.ToString(json_msg.is_connection)); // получаем статус сообщения
-                            string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
-                            string pc_name = Convert.ToString(json_msg.pc_name); // получаем имя машины
-                            string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
-
-                            if (is_connection)
+                            try
                             {
-                                try
-                                {
 
-                                    connected_users.Dispatcher.Invoke((MethodInvoker)delegate
-                                    {
-                                        // добавляем нового клиента в хэш-таблицу
-                                        this.connected_clients.Add(user_name, pc_name);
-                                        // добавляем нового клиента в ListBox приложения
-                                        ListBoxItem new_client = new ListBoxItem();
-                                        new_client.Content = user_name;
-                                        int new_client_id = this.connected_users.Items.Add(new_client);
-                                        // добавляем клиента в хэш-таблицу для удаления быстрого удаления из ListBox
-                                        this.listbox_connected_clients.Add(user_name, new_client);
-                                    });
-
-                                }
-                                catch
+                                connected_users.Dispatcher.Invoke((MethodInvoker)delegate
                                 {
-                                    //
-                                }
+                                    // добавляем нового клиента в хэш-таблицу
+                                    this.connected_clients.Add(user_name, pc_name);
+                                    // добавляем нового клиента в ListBox приложения
+                                    ListBoxItem new_client = new ListBoxItem();
+                                    new_client.Content = user_name;
+                                    int new_client_id = this.connected_users.Items.Add(new_client);
+                                    // добавляем клиента в хэш-таблицу для удаления быстрого удаления из ListBox
+                                    this.listbox_connected_clients.Add(user_name, new_client);
+                                });
+
                             }
-                            else
+                            catch
                             {
                                 //
-                                SendMessageToClients(user_name, user_message);
-                                this.user_messages.Items.Add($">> {user_name} : {user_message}");
                             }
-
-                            //this.user_messages.Items.Add(">> " + msg);                      // выводим полученное сообщение на форму
                         }
-                    });
+                        else
+                        {
+                            //
 
-                    DIS.Import.DisconnectNamedPipe(PipeHandle);                             // отключаемся от канала клиента 
+                            SendMessageToClients(user_name, user_message);
+                            
+                            user_messages.Dispatcher.Invoke((MethodInvoker)delegate
+                            {
+                                this.user_messages.Items.Add($">> {user_name} : {user_message}"); // выводим полученное сообщение на форму
+                            });
+                        }
+                    }
 
                     //CheckUsersForDelete();
 
+                    DIS.Import.DisconnectNamedPipe(PipeHandle);                             // отключаемся от канала клиента 
                     Thread.Sleep(500);                                                      // приостанавливаем работу потока перед тем, как приcтупить к обслуживанию очередного клиента
                 }
             }
-
         }
 
         private void SendMessageToClients(string user_name, string user_message)
         {
+            bool isStatusCheck = false;
+
             dynamic msg_object = new System.Dynamic.ExpandoObject();
+            msg_object.is_status_check = isStatusCheck.ToString();
             msg_object.user_name = user_name;
             msg_object.user_message = user_message;
-            
             // Для кириллицы
             var options1 = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 WriteIndented = true,
             };
-
             string msg_json = JsonSerializer.Serialize(msg_object, options1);
-
             byte[] buff = Encoding.Unicode.GetBytes(msg_json);
 
-            ICollection connected_clients_keys = connected_clients.Keys;
+            //
+            List<string> connected_clients_keys_for_delete = new List<string>();
 
+            ICollection connected_clients_keys = connected_clients.Keys;
             foreach (string _user_name in connected_clients_keys)
             {
                 uint BytesWritten = 0;  // количество реально записанных в канал байт
@@ -189,42 +189,75 @@ namespace PipesServer
                 // открываем именованный канал, имя которого указано в поле server_pipe_name
                 ClientPipeHandle = DIS.Import.CreateFile(client_pipe_name, DIS.Types.EFileAccess.GenericWrite, DIS.Types.EFileShare.Read, 0, DIS.Types.ECreationDisposition.OpenExisting, 0, 0);
                 DIS.Import.WriteFile(ClientPipeHandle, buff, Convert.ToUInt32(buff.Length), ref BytesWritten, 0);         // выполняем запись последовательности байт в канал
+
+                if (ClientPipeHandle == -1)
+                {
+                    connected_clients_keys_for_delete.Add(_user_name);
+                }
+
                 DIS.Import.CloseHandle(ClientPipeHandle);
+            }
+
+            foreach (string _user_name in connected_clients_keys_for_delete)
+            {
+                connected_clients.Remove(_user_name);
+                connected_users.Dispatcher.Invoke((MethodInvoker)delegate
+                {
+                    this.connected_users.Items.Remove(listbox_connected_clients[_user_name]);
+                });
+                listbox_connected_clients.Remove(_user_name);
             }
         }
 
         private void CheckUsersForDelete()
         {
-                List<string> connected_clients_keys_for_delete = new List<string>();
+            bool isStatusCheck = true;
 
-                ICollection connected_clients_keys = connected_clients.Keys;
+            dynamic msg_object = new System.Dynamic.ExpandoObject();
+            msg_object.is_status_check = isStatusCheck.ToString();
+            msg_object.user_name = "";
+            msg_object.user_message = "";
+            // Для кириллицы
+            var options1 = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true,
+            };
+            string msg_json = JsonSerializer.Serialize(msg_object, options1);
+            byte[] buff = Encoding.Unicode.GetBytes(msg_json);
 
-                foreach (string _user_name in connected_clients_keys)
+            List<string> connected_clients_keys_for_delete = new List<string>();
+
+            ICollection connected_clients_keys = connected_clients.Keys;
+            foreach (string _user_name in connected_clients_keys)
+            {
+                uint BytesWritten = 0;  // количество реально записанных в канал байт
+
+                string _pc_name = (string)connected_clients[_user_name];
+                string client_pipe_name;
+                if (_pc_name == Dns.GetHostName())
+                    client_pipe_name = $"\\\\.\\pipe\\{_user_name}";
+                else
+                    client_pipe_name = $"\\\\{_pc_name}\\pipe\\{_user_name}";
+
+                ClientPipeHandle = DIS.Import.CreateFile(client_pipe_name, DIS.Types.EFileAccess.GenericWrite, DIS.Types.EFileShare.Read, 0, DIS.Types.ECreationDisposition.OpenExisting, 0, 0);
+                DIS.Import.WriteFile(ClientPipeHandle, buff, Convert.ToUInt32(buff.Length), ref BytesWritten, 0);         // выполняем запись последовательности байт в канал
+                if (ClientPipeHandle == -1)
                 {
-                    string _pc_name = (string)connected_clients[_user_name];
-                    string client_pipe_name;
-                    if (_pc_name == Dns.GetHostName())
-                        client_pipe_name = $"\\\\.\\pipe\\{_user_name}";
-                    else
-                        client_pipe_name = $"\\\\{_pc_name}\\pipe\\{_user_name}";
-
-                    ClientPipeHandle = DIS.Import.CreateFile(client_pipe_name, DIS.Types.EFileAccess.GenericWrite, DIS.Types.EFileShare.Read, 0, DIS.Types.ECreationDisposition.OpenExisting, 0, 0);
-                    if (ClientPipeHandle == -1)
+                    connected_users.Dispatcher.Invoke((MethodInvoker)delegate
                     {
-                        connected_users.Dispatcher.Invoke((MethodInvoker)delegate
-                        {
-                            this.connected_users.Items.Remove(listbox_connected_clients[_user_name]);
-                            connected_clients_keys_for_delete.Add(_user_name);
-                            listbox_connected_clients.Remove(_user_name);
-                        });
-                    }
-                    DIS.Import.CloseHandle(ClientPipeHandle);
+                        this.connected_users.Items.Remove(listbox_connected_clients[_user_name]);
+                    });
+                    listbox_connected_clients.Remove(_user_name);
+                    connected_clients_keys_for_delete.Add(_user_name);
                 }
+                DIS.Import.CloseHandle(ClientPipeHandle);
+            }
 
-                foreach (string _user_name in connected_clients_keys_for_delete)
-                {
-                    connected_clients.Remove(_user_name);
-                }
+            foreach (string _user_name in connected_clients_keys_for_delete)
+            {
+                connected_clients.Remove(_user_name);
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

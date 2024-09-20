@@ -63,22 +63,32 @@ namespace PipesClient
                     DIS.Import.ReadFile(ClientPipeHandle, buff, 1024, ref realBytesReaded, 0);    // считываем последовательность байтов из канала в буфер buff
                     msg = Encoding.Unicode.GetString(buff, 0, (int)realBytesReaded);                                 // выполняем преобразование байтов в последовательность символов
 
-                    // создаем динамический объект и десериализуем json строку
-                    dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
-                    string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
-                    string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
-
-                    if (ClientName == user_name)
-                        user_name += " (Вы) ";
-
-                    all_messages.Dispatcher.Invoke((MethodInvoker)delegate
+                    try
                     {
-                        // msg != "" не выполняется
-                        if (msg != "" && realBytesReaded != 0)
+                        // создаем динамический объект и десериализуем json строку
+                        dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
+                        bool is_status_check = Convert.ToBoolean(Convert.ToString(json_msg.is_status_check));
+                        string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
+                        string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
+
+                        if (ClientName == user_name)
+                            user_name += " (Вы) ";
+
+                        all_messages.Dispatcher.Invoke((MethodInvoker)delegate
                         {
-                            this.all_messages.Items.Add($">> {user_name} : {user_message}");                   // выводим полученное сообщение на форму
-                        }
-                    });
+                            // msg != "" не выполняется
+                            if (msg != "" && realBytesReaded != 0)
+                            {
+                                if (!is_status_check)
+                                    this.all_messages.Items.Add($">> {user_name} : {user_message}");                   // выводим полученное сообщение на форму
+                            }
+                        });
+
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Ошибка, канал перестал отвечать!");
+                    }
 
                     DIS.Import.DisconnectNamedPipe(ClientPipeHandle);                             // отключаемся от канала клиента 
                     Thread.Sleep(500);                                                      // приостанавливаем работу потока перед тем, как приcтупить к обслуживанию очередного клиента
@@ -89,6 +99,7 @@ namespace PipesClient
         private void ConnectToServer()
         {
             this._connected = true;
+            ClientName = this.user_name.Text;
             this.ClientPipeName += this.user_name.Text;
 
             int res = this.ClientPipeHandle = DIS.Import.CreateNamedPipe(
@@ -163,7 +174,6 @@ namespace PipesClient
             dynamic msg_object = new System.Dynamic.ExpandoObject();
             msg_object.is_connection = isConnection.ToString();
             msg_object.user_name = this.user_name.Text;
-            ClientName = msg_object.user_name;
             msg_object.pc_name = Dns.GetHostName().ToString();
             msg_object.user_message = this.user_message.Text;
             string msg_json = JsonSerializer.Serialize(msg_object);
