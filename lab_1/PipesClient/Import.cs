@@ -9,7 +9,7 @@ namespace DIS
 {
     class Import
     {
-        // Создание именнованного канала
+        // Создание именнованного канала TEST1
         [DllImport("kernel32.dll")]
         public static extern int CreateNamedPipe(
             string lpName,         //строка, содержащая имя канала 
