@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Interop;
 using System.Text.Json;
+using System.Dynamic;
 
 namespace PipesClient
 {
@@ -36,6 +37,8 @@ namespace PipesClient
         private string ClientPipeName = $"\\\\.\\pipe\\";
         private Thread t; // поток для обслуживания канала клиента
         private bool _connected = false; // флаг, указывающий, подключен ли клиент к серверу
+
+        private string ClientName;
 
         // конструктор формы
         public MainWindow()
@@ -58,13 +61,22 @@ namespace PipesClient
                     byte[] buff = new byte[1024];                                           // буфер прочитанных из канала байтов
                     DIS.Import.FlushFileBuffers(ClientPipeHandle);                                // "принудительная" запись данных, расположенные в буфере операционной системы, в файл именованного канала
                     DIS.Import.ReadFile(ClientPipeHandle, buff, 1024, ref realBytesReaded, 0);    // считываем последовательность байтов из канала в буфер buff
-                    msg = Encoding.Unicode.GetString(buff);                                 // выполняем преобразование байтов в последовательность символов
+                    msg = Encoding.Unicode.GetString(buff, 0, (int)realBytesReaded);                                 // выполняем преобразование байтов в последовательность символов
+
+                    // создаем динамический объект и десериализуем json строку
+                    dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
+                    string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
+                    string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
+
+                    if (ClientName == user_name)
+                        user_name += " (Вы) ";
+
                     all_messages.Dispatcher.Invoke((MethodInvoker)delegate
                     {
                         // msg != "" не выполняется
                         if (msg != "" && realBytesReaded != 0)
                         {
-                            this.all_messages.Items.Add(">> " + msg);                      // выводим полученное сообщение на форму
+                            this.all_messages.Items.Add($">> {user_name} : {user_message}");                   // выводим полученное сообщение на форму
                         }
                     });
 
@@ -151,6 +163,7 @@ namespace PipesClient
             dynamic msg_object = new System.Dynamic.ExpandoObject();
             msg_object.is_connection = isConnection.ToString();
             msg_object.user_name = this.user_name.Text;
+            ClientName = msg_object.user_name;
             msg_object.pc_name = Dns.GetHostName().ToString();
             msg_object.user_message = this.user_message.Text;
             string msg_json = JsonSerializer.Serialize(msg_object);
