@@ -1,22 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\",
+  "WorkspaceRootPath": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|m:\\vs projects\\tiavv\\lab_1\\pipesclient\\client.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|m:\\vs projects\\tiavv\\lab_2\\pipesclient\\client.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|solutionrelative:client.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_1\\PipesClient\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_2\\PipesClient\\client.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|solutionrelative:client.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_2\\PipesClient\\import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|solutionrelative:import.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_1\\PipesClient\\types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_2\\PipesClient\\types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|solutionrelative:types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|M:\\VS projects\\tiavv\\lab_1\\PipesClient\\client.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{461AAC31-6911-481C-832B-E65E78E3D388}|PipesClient.csproj|solutionrelative:client.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,25 +42,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Types.cs",
-              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Types.cs",
+              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Types.cs",
               "RelativeDocumentMoniker": "Types.cs",
-              "ToolTip": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Types.cs",
+              "ToolTip": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Types.cs",
               "RelativeToolTip": "Types.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAIwAAAAAAAAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAIwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T10:36:03.569Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Import.cs",
-              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Import.cs",
+              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Import.cs",
               "RelativeDocumentMoniker": "Import.cs",
-              "ToolTip": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Import.cs",
+              "ToolTip": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Import.cs",
               "RelativeToolTip": "Import.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAswB4AAAA1AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T10:35:45.638Z"
             },
@@ -68,22 +68,22 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Client.xaml.cs",
-              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Client.xaml.cs",
+              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Client.xaml.cs",
               "RelativeDocumentMoniker": "Client.xaml.cs",
-              "ToolTip": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Client.xaml.cs",
+              "ToolTip": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Client.xaml.cs",
               "RelativeToolTip": "Client.xaml.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAAGAAAAAJAAAA",
+              "ViewState": "AQIAAEAAAAAAAAAAAAAQwFMAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T10:35:47.078Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Client.xaml",
-              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Client.xaml",
+              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Client.xaml",
               "RelativeDocumentMoniker": "Client.xaml",
-              "ToolTip": "M:\\VS projects\\tiavv\\lab_1\\PipesClient\\Client.xaml",
+              "ToolTip": "M:\\VS projects\\tiavv\\lab_2\\PipesClient\\Client.xaml",
               "RelativeToolTip": "Client.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-09-20T10:35:47.484Z"

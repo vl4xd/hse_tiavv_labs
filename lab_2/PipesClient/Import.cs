@@ -1,36 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace DIS
 {
     class Import
     {
-        // Создание именнованного канала TEST1
+        //Создание майлслота
         [DllImport("kernel32.dll")]
-        public static extern int CreateNamedPipe(
-            string lpName,         //строка, содержащая имя канала 
-            uint dwOpenMode,             //режим открытия канала
-            uint dwPipeMode,             //режим работы канала
-            uint nMaxInstances,          // максимальное количество реализаций канала
-            uint nOutBufferSize,         // размер выходного буфера в байтах
-            uint nInBufferSize,          // размер входного буфера в байтах
-            int nDefaultTimeOut,        // время ожидания в мс
-            uint lpSecurityAttributes);   //адрес структуры защиты
+        public static extern int CreateMailslot(string lpName,            //строка, содержащая имя канала Mailslot
+                                            int nMaxMessageSize,          //максимальный размер сообщения
+                                            int lReadTimeout,             //время ожидания для чтения
+                                            int securityAttributes);     //адрес структуры защиты
 
-        // Соединение со стороны серверного процесса
         [DllImport("kernel32.dll")]
-        public static extern bool ConnectNamedPipe(int hNamedPipe,         //дескриптор канала
-                                            int lpOverlapped);             //режим открытия канала
+        public static extern bool GetMailslotInfo(int hMailslot,
+            int lpMaxMessageSize, ref int lpNextSize, ref int lpMessageCount,
+            int lpReadTimeout);
 
-        // Отключение серверного процесса от клиентского канала
-        [DllImport("kernel32.dll")]
-        public static extern bool DisconnectNamedPipe(int hPipe);
-
-        //Открытие канала
+        //Открытие майлслота
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int CreateFile(string lpFileName,                                  //строка с именем канала  
                                                Types.EFileAccess dwDesiredAccess,               //режим доступа
@@ -40,6 +29,7 @@ namespace DIS
                                                int dwFlagsAndAttributes,                        //атрибуты файла
                                                int hTemplateFile);                              //идентификатор файла с атрибутами
 
+
         //Запись данных в канал
         [DllImport("kernel32.dll")]
         public static extern bool WriteFile(int hFile,                //описатель реализации канала  
@@ -47,6 +37,7 @@ namespace DIS
                                      uint nNumberOfBytesToWrite,      //размер буфера
                                      ref uint lpNumberOfBytesWritten, //число байт, действительно записанных в канал
                                      int lpOverlapped);               //зависит от режима работы
+
         //Чтение данных из канала
         [DllImport("kernel32.dll")]
         public static extern bool ReadFile(int hFile,                 //описатель реализации канала
@@ -55,7 +46,7 @@ namespace DIS
                                     ref uint lpNumberOfBytesRead, //количество действительно прочитанных байт из канала
                                     int lpOverlapped);         //зависит от режима работы
 
-        // Функция, которая проверяет, что данные действительно записались в мейлслот
+        //Функция, которая проверяет, что данные действительно записались в мейлслот
         [DllImport("kernel32.dll")]
         public static extern byte FlushFileBuffers(int hPipe);
 
