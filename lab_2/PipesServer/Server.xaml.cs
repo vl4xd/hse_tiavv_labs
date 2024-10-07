@@ -33,8 +33,10 @@ namespace PipesServer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Int32 PipeHandle; // дескриптор канала
-        private string PipeName = "\\\\" + Dns.GetHostName() + "\\pipe\\ServerPipe"; // имя канала, Dns.GetHostName() - метод, возвращающий имя машины, на которой запущено приложение
+        private Int32 HandleReverseMailSlot;
+
+        private int ClientHandleMailSlot;       // дескриптор мэйлслота
+        private string MailSlotName = "\\\\" + Dns.GetHostName() + "\\mailslot\\ServerMailslot";    // имя мэйлслота, Dns.GetHostName() - метод, возвращающий имя машины, на которой запущено приложение
         private Thread t; // поток для обслуживания канала
         private bool _continue = true; // флаг, указывающий продолжается ли работа с каналом
 
@@ -52,104 +54,93 @@ namespace PipesServer
 
         private void ServerOn()
         {
-            // создание именованного канала
-            PipeHandle = DIS.Import.CreateNamedPipe(
-                "\\\\.\\pipe\\ServerPipe",
-                DIS.Types.PIPE_ACCESS_DUPLEX,
-                DIS.Types.PIPE_TYPE_BYTE | DIS.Types.PIPE_WAIT,
-                DIS.Types.PIPE_UNLIMITED_INSTANCES,
-                0,
-                1024,
-                DIS.Types.NMPWAIT_WAIT_FOREVER,
-                (uint)0
-                );
+            // создание мэйлслота
+            ClientHandleMailSlot = DIS.Import.CreateMailslot("\\\\.\\mailslot\\ServerMailslot", 0, DIS.Types.MAILSLOT_WAIT_FOREVER, 0);
 
-            // вывод имени канала, в заголовок формы, чтобы можно было его использовать для ввода в форме клиента, запущенного на другом вычислительном узле
-            this.Title += "    " + "Имя сервера: " + this.PipeName;
+            // вывод имени мэйлслота в заголовок формы, чтобы можно было его использовать для ввода имени в форме клиента, запущенного на другом вычислительном узле
+            this.Title += "    " + "Имя сервера: " + this.MailSlotName;
 
-            // создание потока, отвечающего за работу с каналом
+            // создание потока, отвечающего за работу с мэйлслотом
             t = new Thread(ReceiveMessage);
             t.Start();
         }
 
-        private void ServerOff()
+        private void MailOff()
         {
-            this._continue = false;      // сообщаем, что работа с каналом завершена
+            this._continue = false;      // сообщаем, что работа с мэйлслотом завершена
 
-            if (this.t != null)
-                this.t.Abort();          // завершаем поток
+            if (t != null)
+                t.Abort();          // завершаем поток
 
-            if (this.PipeHandle != -1)
-                DIS.Import.CloseHandle(this.PipeHandle);     // закрываем дескриптор канала
+            if (ClientHandleMailSlot != -1)
+                DIS.Import.CloseHandle(ClientHandleMailSlot);            // закрываем дескриптор мэйлслота
         }
 
         private void ReceiveMessage()
         {
             string msg = ""; // прочитанное сообщение
-            uint realBytesReaded = 0; // количество реально прочитанных из канала байтов
+            int MailslotSize = 0;       // максимальный размер сообщения
+            int lpNextSize = 0;         // размер следующего сообщения
+            int MessageCount = 0;       // количество сообщений в мэйлслоте
+            uint realBytesReaded = 0;   // количество реально прочитанных из мэйлслота байтов
 
             // входим в бесконечный цикл работы с каналом
             while (this._continue)
             {
-                if (DIS.Import.ConnectNamedPipe(PipeHandle, 0))
+                if (DIS.Import.GetMailslotInfo(ClientHandleMailSlot, MailslotSize, ref lpNextSize, ref MessageCount, 0))
                 {
-                    byte[] buff = new byte[1024];                                           // буфер прочитанных из канала байтов
-                    DIS.Import.FlushFileBuffers(PipeHandle);                                // "принудительная" запись данных, расположенные в буфере операционной системы, в файл именованного канала
-                    DIS.Import.ReadFile(PipeHandle, buff, 1024, ref realBytesReaded, 0);    // считываем последовательность байтов из канала в буфер buff
-
-                    // считываем количество реально прочитанных байт из канала начиная с 0 индекса т.к. изначально создается buff в размере 1024 байт
-                    // иначе при парсинге сообщения в json возникает ошибка из-за прочитанных в конце пустых байтов
-                    msg = Encoding.Unicode.GetString(buff, 0, (int)realBytesReaded);         // выполняем преобразование байтов в последовательность символов
-
-                    if (msg != "")
-                    {
-                        // создаем динамический объект и десериализуем json строку
-                        dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
-                        bool is_connection = Convert.ToBoolean(Convert.ToString(json_msg.is_connection)); // получаем статус сообщения
-                        string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
-                        string pc_name = Convert.ToString(json_msg.pc_name); // получаем имя машины
-                        string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
-
-                        if (is_connection)
+                    // если есть сообщения в мэйлслоте, то обрабатываем каждое из них
+                    if (MessageCount > 0)
+                        for (int i = 0; i < MessageCount; i++)
                         {
-                            try
-                            {
+                            byte[] buff = new byte[1024];                           // буфер прочитанных из мэйлслота байтов
+                            DIS.Import.FlushFileBuffers(ClientHandleMailSlot);      // "принудительная" запись данных, расположенные в буфере операционной системы, в файл мэйлслота
+                            DIS.Import.ReadFile(ClientHandleMailSlot, buff, 1024, ref realBytesReaded, 0);      // считываем последовательность байтов из мэйлслота в буфер buff
+                            msg = Encoding.Unicode.GetString(buff, 0, (int)realBytesReaded);                 // выполняем преобразование байтов в последовательность символов
 
-                                connected_users.Dispatcher.Invoke((MethodInvoker)delegate
+                            if (msg != "")
+                            {
+                                // создаем динамический объект и десериализуем json строку
+                                dynamic json_msg = JsonSerializer.Deserialize<ExpandoObject>(msg);
+                                //bool is_connection = Convert.ToBoolean(Convert.ToString(json_msg.is_connection)); // получаем статус сообщения
+                                string user_name = Convert.ToString(json_msg.user_name); // получаем имя пользователя
+                                string pc_name = Convert.ToString(json_msg.pc_name); // получаем имя машины
+                                string user_message = Convert.ToString(json_msg.user_message); // получаем сообщение пользователя
+
+                                try
                                 {
-                                    // добавляем нового клиента в хэш-таблицу
-                                    this.connected_clients.Add(user_name, pc_name);
-                                    // добавляем нового клиента в ListBox приложения
-                                    ListBoxItem new_client = new ListBoxItem();
-                                    new_client.Content = user_name;
-                                    int new_client_id = this.connected_users.Items.Add(new_client);
-                                    // добавляем клиента в хэш-таблицу для удаления быстрого удаления из ListBox
-                                    this.listbox_connected_clients.Add(user_name, new_client);
-                                });
+                                    if (!connected_clients.ContainsKey(user_name))
+                                    connected_users.Dispatcher.Invoke((MethodInvoker)delegate
+                                    {
+                                        // добавляем нового клиента в хэш-таблицу
+                                        this.connected_clients.Add(user_name, pc_name);
+                                        // добавляем нового клиента в ListBox приложения
+                                        ListBoxItem new_client = new ListBoxItem();
+                                        new_client.Content = user_name;
+                                        int new_client_id = this.connected_users.Items.Add(new_client);
+                                        // добавляем клиента в хэш-таблицу для удаления быстрого удаления из ListBox
+                                        this.listbox_connected_clients.Add(user_name, new_client);
+                                    });
 
-                            }
-                            catch
-                            {
+                                }
+                                catch (Exception)
+                                {
+                                    //
+                                }
                                 //
+
+                                SendMessageToClients(user_name, user_message);
+
+                                user_messages.Dispatcher.Invoke((MethodInvoker)delegate
+                                {
+                                    this.user_messages.Items.Add($">> {user_name} : {user_message}"); // выводим полученное сообщение на форму
+                                });
+                                Thread.Sleep(500);                                      // приостанавливаем работу потока перед тем, как приcтупить к обслуживанию очередного клиента
                             }
+
+                            //CheckUsersForDelete();
+                            Thread.Sleep(500);                                                      // приостанавливаем работу потока перед тем, как приcтупить к обслуживанию очередного клиента
                         }
-                        else
-                        {
-                            //
-
-                            SendMessageToClients(user_name, user_message);
-                            
-                            user_messages.Dispatcher.Invoke((MethodInvoker)delegate
-                            {
-                                this.user_messages.Items.Add($">> {user_name} : {user_message}"); // выводим полученное сообщение на форму
-                            });
-                        }
-                    }
-
-                    //CheckUsersForDelete();
-
-                    DIS.Import.DisconnectNamedPipe(PipeHandle);                             // отключаемся от канала клиента 
-                    Thread.Sleep(500);                                                      // приостанавливаем работу потока перед тем, как приcтупить к обслуживанию очередного клиента
                 }
             }
         }
@@ -186,9 +177,15 @@ namespace PipesServer
                 else
                     client_pipe_name = $"\\\\{_pc_name}\\pipe\\{_user_name}";
 
-                // открываем именованный канал, имя которого указано в поле server_pipe_name
-                ClientPipeHandle = DIS.Import.CreateFile(client_pipe_name, DIS.Types.EFileAccess.GenericWrite, DIS.Types.EFileShare.Read, 0, DIS.Types.ECreationDisposition.OpenExisting, 0, 0);
-                DIS.Import.WriteFile(ClientPipeHandle, buff, Convert.ToUInt32(buff.Length), ref BytesWritten, 0);         // выполняем запись последовательности байт в канал
+                HandleReverseMailSlot = DIS.Import.CreateFile($"\\\\.\\mailslot\\{_user_name}",
+                                DIS.Types.EFileAccess.GenericWrite,
+                                DIS.Types.EFileShare.Read,
+                                0,
+                                DIS.Types.ECreationDisposition.OpenExisting,
+                                0,
+                                0);
+
+                DIS.Import.WriteFile(HandleReverseMailSlot, buff, Convert.ToUInt32(buff.Length), ref BytesWritten, 0);     // выполняем запись последовательности байт в мэйлслот
 
                 if (ClientPipeHandle == -1)
                 {
@@ -262,7 +259,7 @@ namespace PipesServer
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ServerOff();
+            MailOff();
         }
     }
 }
