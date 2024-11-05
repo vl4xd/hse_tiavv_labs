@@ -35,14 +35,9 @@ namespace PipesServer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Int32 HandleReverseMailSlot;
-
-        private int ClientHandleMailSlot;       // дескриптор мэйлслота
-        private string MailSlotName = "\\\\" + Dns.GetHostName() + "\\mailslot\\ServerMailslot";    // имя мэйлслота, Dns.GetHostName() - метод, возвращающий имя машины, на которой запущено приложение
         private Thread t; // поток для обслуживания канала
         private bool _continue = true; // флаг, указывающий продолжается ли работа с каналом
 
-        private Int32 ClientPipeHandle; // дескриптор канала клиента
         private Hashtable connected_clients = new Hashtable(); // хэш-таблица {имя_пользователя, имя_машины}
         private Hashtable listbox_connected_clients = new Hashtable(); // хэш-таблица {имя_пользователя, ListBox.Item.index}
 
@@ -51,6 +46,8 @@ namespace PipesServer
         private List<Thread> Threads = new List<Thread>();      // список потоков приложения (кроме родительского)
 
         private Dictionary<string, TcpClient> connectedClients = new Dictionary<string, TcpClient>(); // словарь для хранения подключенных клиентов
+
+        private UdpClient udpListener; // UDP-сокет для прослушивания широковещательных запросов
 
         // конструктор формы сервера
         public MainWindow()
@@ -85,9 +82,38 @@ namespace PipesServer
             Threads.Clear();
             Threads.Add(new Thread(ReceiveMessage));
             Threads[Threads.Count - 1].Start();
+
+            udpListener = new UdpClient(1011); // порт для прослушивания широковещательных запросов
+            Thread udpThread = new Thread(ListenForBroadcast);
+            udpThread.Start();
         }
 
-        private void MailOff()
+        private void ListenForBroadcast()
+        {
+            IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            while (_continue)
+            {
+                try
+                {
+                    byte[] receiveBytes = udpListener.Receive(ref remoteEndPoint);
+                    string receivedMessage = Encoding.ASCII.GetString(receiveBytes);
+
+                    if (receivedMessage == "DISCOVER_SERVER")
+                    {
+                        byte[] sendBytes = Encoding.ASCII.GetBytes("SERVER_RESPONSE");
+                        udpListener.Send(sendBytes, sendBytes.Length, remoteEndPoint);
+                    }
+                }
+                catch (Exception)
+                {
+                    // Обработка ошибок
+                }
+            }
+        }
+
+
+        private void ServerOff()
         {
             _continue = false;      // сообщаем, что работа с сокетами завершена
 
@@ -109,12 +135,6 @@ namespace PipesServer
 
         private void ReceiveMessage()
         {
-            string msg = ""; // прочитанное сообщение
-            int MailslotSize = 0;       // максимальный размер сообщения
-            int lpNextSize = 0;         // размер следующего сообщения
-            int MessageCount = 0;       // количество сообщений в мэйлслоте
-            uint realBytesReaded = 0;   // количество реально прочитанных из мэйлслота байтов
-
             // входим в бесконечный цикл работы с каналом
             while (this._continue)
             {
@@ -286,7 +306,7 @@ namespace PipesServer
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MailOff();
+            ServerOff();
         }
     }
 }

@@ -17,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E58226FB-DC30-4AB9-9221-6755AA3054FB}|PipesServer.csproj|M:\\VS projects\\tiavv\\lab_3\\PipesServer\\types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E58226FB-DC30-4AB9-9221-6755AA3054FB}|PipesServer.csproj|solutionrelative:types.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E58226FB-DC30-4AB9-9221-6755AA3054FB}|PipesServer.csproj|M:\\VS projects\\tiavv\\lab_3\\PipesServer\\server.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E58226FB-DC30-4AB9-9221-6755AA3054FB}|PipesServer.csproj|solutionrelative:server.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +50,8 @@
               "RelativeToolTip": "Properties\\AssemblyInfo.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T11:01:21.34Z"
+              "WhenOpened": "2024-09-20T11:01:21.34Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -66,7 +63,8 @@
               "RelativeToolTip": "Types.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAD4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T10:58:21.019Z"
+              "WhenOpened": "2024-09-20T10:58:21.019Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -78,7 +76,8 @@
               "RelativeToolTip": "Import.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-20T10:58:21.094Z"
+              "WhenOpened": "2024-09-20T10:58:21.094Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -88,21 +87,9 @@
               "RelativeDocumentMoniker": "Server.xaml.cs",
               "ToolTip": "M:\\VS projects\\tiavv\\lab_3\\PipesServer\\Server.xaml.cs",
               "RelativeToolTip": "Server.xaml.cs",
-              "ViewState": "AQIAAH4AAAAAAAAAAAAQwIQAAAAMAAAA",
+              "ViewState": "AQIAAMsAAAAAAAAAAAAAAIgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T10:58:21.095Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Server.xaml",
-              "DocumentMoniker": "M:\\VS projects\\tiavv\\lab_3\\PipesServer\\Server.xaml",
-              "RelativeDocumentMoniker": "Server.xaml",
-              "ToolTip": "M:\\VS projects\\tiavv\\lab_3\\PipesServer\\Server.xaml",
-              "RelativeToolTip": "Server.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-20T10:58:21.096Z",
               "EditorCaption": ""
             }
           ]
