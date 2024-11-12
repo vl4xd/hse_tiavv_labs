@@ -1,0 +1,82 @@
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\obj\x86\Debug\MSMQ.frmMain.resources
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.Properties.Resources.resources
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.GenerateResource.Cache
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\bin\Debug\MSMQClient.pdb
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe
+c:\users\alexander\documents\visual studio 2010\Projects\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.pdb
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.pdb
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\bin\Debug\MSMQClient.pdb
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\obj\x86\Debug\MSMQ.frmMain.resources
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.Properties.Resources.resources
+C:\Users\Alexander\Desktop\12345\New\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.GenerateResource.Cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.pdb
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.AssemblyReference.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQ.frmMain.resources
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.Properties.Resources.resources
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.GenerateResource.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.CoreCompileInputs.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.pdb
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.SuggestedBindingRedirects.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Json.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Memory.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.ValueTuple.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Buffers.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.pdb
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.dll.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Json.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Memory.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.ValueTuple.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Buffers.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\practice_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.CopyComplete
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.exe
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MSMQClient.pdb
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Json.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Memory.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.ValueTuple.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Buffers.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.pdb
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\MsgJsonLibrary.dll.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Json.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Memory.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.ValueTuple.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Text.Encodings.Web.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Buffers.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.AssemblyReference.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.SuggestedBindingRedirects.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe.config
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQ.frmMain.resources
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.Properties.Resources.resources
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.GenerateResource.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.CoreCompileInputs.cache
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.csproj.CopyComplete
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.exe
+C:\Users\vlaxd\OneDrive\Рабочий стол\4_course\ТиАВВ\hse_tiavv_labs\lab_4\MSMQClient\MSMQClient\obj\x86\Debug\MSMQClient.pdb
