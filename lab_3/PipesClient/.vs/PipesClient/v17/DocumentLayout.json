@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 368,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,6 +39,14 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
@@ -72,7 +80,7 @@
               "RelativeDocumentMoniker": "Client.xaml.cs",
               "ToolTip": "M:\\VS projects\\tiavv\\lab_3\\PipesClient\\Client.xaml.cs",
               "RelativeToolTip": "Client.xaml.cs",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAAAH8AAAAQAAAA",
+              "ViewState": "AQIAABAAAAAAAAAAAAAAANkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-20T10:35:47.078Z",
               "EditorCaption": ""

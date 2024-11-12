@@ -32,12 +32,6 @@ namespace PipesClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Int32 HandleMailSlot;   // дескриптор мэйлслота
-
-        private int ClientHandleMailSlot;       // дескриптор мэйлслота клиента
-
-        // процесс может создать канал только на той рабочей станции, где он запущен, поэтому при создании канала имя сервера никогда не указывается (.)
-        //private string ClientPipeName = $"\\\\.\\pipe\\";
         private Thread t; // поток для обслуживания канала клиента
         private bool _connected = false; // флаг, указывающий, подключен ли клиент к серверу
 
@@ -45,6 +39,8 @@ namespace PipesClient
 
         private TcpClient Client = new TcpClient();     // клиентский сокет
         private IPAddress IP;                           // IP-адрес клиента
+
+        private UdpClient udpClient; // UDP-сокет для отправки широковещательных запросов
 
         // конструктор формы
         public MainWindow()
@@ -66,7 +62,7 @@ namespace PipesClient
                 }
         }
 
-        // присоединение к мэйлслоту
+        // присоединение к сокету
         private void ReceiveMessage()
         {
             string msg = "";
@@ -119,22 +115,43 @@ namespace PipesClient
             }
         }
 
-        private void ConnectToMail()
+        private void ConnectToSocket()
         {
             ClientName = this.user_name.Text;
 
             try
             {
-                int Port = 1010;                                // номер порта, через который выполняется обмен сообщениями
-                IPAddress IP = IPAddress.Parse(server_pipe_name.Text);      // разбор IP-адреса сервера, указанного в поле tbIP
-                Client.Connect(IP, Port);                       // подключение к серверному сокету
-                button_connect.IsEnabled = false;
-                button_send_message.IsEnabled = true;
-                this._connected = true;
+                // Отправляем широковещательный запрос для поиска сервера
+                udpClient = new UdpClient();
+                udpClient.EnableBroadcast = true;
+                byte[] sendBytes = Encoding.ASCII.GetBytes("DISCOVER_SERVER");
+                IPEndPoint broadcastEndPoint = new IPEndPoint(IPAddress.Broadcast, 1011);
+                udpClient.Send(sendBytes, sendBytes.Length, broadcastEndPoint);
 
-                // Запускаем поток для получения сообщений
-                t = new Thread(ReceiveMessage);
-                t.Start();
+                // Ожидаем ответа от сервера
+                IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                byte[] receiveBytes = udpClient.Receive(ref remoteEndPoint);
+                string receivedMessage = Encoding.ASCII.GetString(receiveBytes);
+
+                if (receivedMessage == "SERVER_RESPONSE")
+                {
+                    IPAddress serverIP = remoteEndPoint.Address;
+                    int serverPort = 1010;
+
+                    // Подключаемся к серверу
+                    Client.Connect(serverIP, serverPort);
+                    button_connect.IsEnabled = false;
+                    button_send_message.IsEnabled = true;
+                    this._connected = true;
+
+                    // Запускаем поток для получения сообщений
+                    t = new Thread(ReceiveMessage);
+                    t.Start();
+                }
+                else
+                {
+                    MessageBox.Show("Сервер не найден");
+                }
             }
             catch
             {
@@ -146,7 +163,7 @@ namespace PipesClient
 
         private void ClientOn()
         {
-            this.server_pipe_name.Text = "26.66.16.0";
+            this.server_pipe_name.Text = "ШИРОКОВЕЩАТЕЛЬНЫЙ ЗАПРОС!";
 
             ElementsActivator();
         }
@@ -177,7 +194,7 @@ namespace PipesClient
 
         private void button_connect_Click(object sender, RoutedEventArgs e)
         {
-            ConnectToMail();
+            ConnectToSocket();
         }
 
         private void SendMessageToServer()
