@@ -1,0 +1,65 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "M:\\VS projects\\LoadBalancer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6162C0A0-83C2-47F1-ADD2-702250C63CC5}|LoadBalancer\\LoadBalancer.csproj|m:\\vs projects\\loadbalancer\\loadbalancer\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6162C0A0-83C2-47F1-ADD2-702250C63CC5}|LoadBalancer\\LoadBalancer.csproj|solutionrelative:loadbalancer\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6162C0A0-83C2-47F1-ADD2-702250C63CC5}|LoadBalancer\\LoadBalancer.csproj|M:\\VS projects\\LoadBalancer\\loadbalancer\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6162C0A0-83C2-47F1-ADD2-702250C63CC5}|LoadBalancer\\LoadBalancer.csproj|solutionrelative:loadbalancer\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 368,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "M:\\VS projects\\LoadBalancer\\LoadBalancer\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "LoadBalancer\\MainWindow.xaml.cs",
+              "ToolTip": "M:\\VS projects\\LoadBalancer\\LoadBalancer\\MainWindow.xaml.cs",
+              "RelativeToolTip": "LoadBalancer\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAAAHUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T18:54:52.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "M:\\VS projects\\LoadBalancer\\LoadBalancer\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "LoadBalancer\\MainWindow.xaml",
+              "ToolTip": "M:\\VS projects\\LoadBalancer\\LoadBalancer\\MainWindow.xaml",
+              "RelativeToolTip": "LoadBalancer\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-25T18:54:53.742Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
